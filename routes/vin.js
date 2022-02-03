@@ -4,6 +4,10 @@ const vinExistence = require('../middleware/vin');
 const connection = require('../db-config');
 const db = connection.promise();
 
+/**
+ * Route GET tous les vins
+ */
+
 vinRouter.get('/', (req, res) => {
   wine
     .getWine()
@@ -11,6 +15,9 @@ vinRouter.get('/', (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
+/**
+ * Route GET pour page ajout
+ */
 vinRouter.get('/ajout', (req, res) => {
   wine
     .getWineModify()
@@ -18,18 +25,32 @@ vinRouter.get('/ajout', (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
+/**
+ * Route GET pour calcul somme de bouteilles
+ */
 vinRouter.get('/calculbouteille', (req, res) => {
   wine
     .calculBouteilles()
     .then((results) => res.status(200).send(results[0]))
     .catch((err) => res.status(500).send(err));
 });
+
+/**
+ * 
+ * Route GET pour calcul montant cave
+ */
+
 vinRouter.get('/calculprix', (req, res) => {
 wine
     .calculPrix()
     .then((results) => res.status(200).send(results[0]))
     .catch((err) => res.status(500).send(err));
 });
+
+/**
+ * 
+ * Route GET par id
+ */
 
 vinRouter.get('/:id', (req, res) => {
   wine
@@ -38,6 +59,10 @@ vinRouter.get('/:id', (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
+/**
+ * 
+ * Route POST nouveau vin
+ */
 vinRouter.post('/ajouter', (req, res) => {
   const {
     nom,
@@ -68,6 +93,10 @@ vinRouter.post('/ajouter', (req, res) => {
     .catch(() => res.status(500).send('Erreur lors de la sauvegarde du vin'));
 });
 
+/**
+ * 
+ * Route PUT par id
+ */
 vinRouter.put('/:id', (req, res) => {
   let existingWine = null;
   wine.getWineById(req.params.id).then(([result]) => {
@@ -86,6 +115,11 @@ vinRouter.put('/:id', (req, res) => {
       });
   });
 });
+
+/**
+ * 
+ * Route DELETE par id
+ */
 
 vinRouter.delete('/:id', vinExistence, (req, res) => {
   db.query('DELETE FROM vin WHERE id = ?', [req.params.id])
