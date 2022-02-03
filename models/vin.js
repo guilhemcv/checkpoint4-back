@@ -17,6 +17,23 @@ const getWineModify = () => {
     .then((result) => result);
 };
 
+const calculBouteilles = () => {
+  return db
+  .query(
+    'SELECT SUM(nb_bouteilles) as somme_bouteille FROM vin'
+  )
+  .then((result) => result);
+};
+
+const calculPrix = () => {
+  return db
+  .query(
+    'SELECT SUM(nb_bouteilles * prix) as somme_prix FROM vin'
+  )
+  .then((result) => result);
+};
+
+
 const getWineById = (id) => {
   return db
     .query('SELECT * FROM vin WHERE id = ?', [id])
@@ -52,4 +69,4 @@ const postWine = ({
     .then((result) => result);
 };
 
-module.exports = { getWine, getWineById, postWine, getWineModify };
+module.exports = { getWine, getWineById, postWine, getWineModify, calculBouteilles, calculPrix };

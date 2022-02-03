@@ -18,6 +18,19 @@ vinRouter.get('/ajout', (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
+vinRouter.get('/calculbouteille', (req, res) => {
+  wine
+    .calculBouteilles()
+    .then((results) => res.status(200).send(results[0]))
+    .catch((err) => res.status(500).send(err));
+});
+vinRouter.get('/calculprix', (req, res) => {
+wine
+    .calculPrix()
+    .then((results) => res.status(200).send(results[0]))
+    .catch((err) => res.status(500).send(err));
+});
+
 vinRouter.get('/:id', (req, res) => {
   wine
     .getWineById(req.params.id)
