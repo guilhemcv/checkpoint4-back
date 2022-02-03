@@ -9,6 +9,14 @@ const getWine = () => {
     .then((result) => result);
 };
 
+const getWineModify = () => {
+  return db
+    .query(
+      'SELECT * FROM vin'
+    )
+    .then((result) => result);
+};
+
 const getWineById = (id) => {
   return db
     .query('SELECT * FROM vin WHERE id = ?', [id])
@@ -44,4 +52,4 @@ const postWine = ({
     .then((result) => result);
 };
 
-module.exports = { getWine, getWineById, postWine };
+module.exports = { getWine, getWineById, postWine, getWineModify };
