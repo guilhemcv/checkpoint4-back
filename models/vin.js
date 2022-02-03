@@ -1,6 +1,9 @@
 const connection = require('../db-config');
 const db = connection.promise();
 
+/**
+ * Requete pour GET tous les vins
+ */
 const getWine = () => {
   return db
     .query(
@@ -9,6 +12,10 @@ const getWine = () => {
     .then((result) => result);
 };
 
+/**
+ *  Requete pour GET page modification
+ * 
+ */
 const getWineModify = () => {
   return db
     .query(
@@ -17,6 +24,9 @@ const getWineModify = () => {
     .then((result) => result);
 };
 
+/**
+ * Requete pour calculer nombre de bouteilles 
+ */
 const calculBouteilles = () => {
   return db
   .query(
@@ -25,6 +35,10 @@ const calculBouteilles = () => {
   .then((result) => result);
 };
 
+/**
+ * 
+ * Requete pour calculer le montant total de la cave
+ */
 const calculPrix = () => {
   return db
   .query(
@@ -33,13 +47,18 @@ const calculPrix = () => {
   .then((result) => result);
 };
 
-
+/**
+ * Requete pour GET par id
+ */
 const getWineById = (id) => {
   return db
     .query('SELECT * FROM vin WHERE id = ?', [id])
     .then((result) => result);
 };
 
+/**
+ * Requete pour POST vin
+ */
 const postWine = ({
   nom,
   nb_bouteilles,
