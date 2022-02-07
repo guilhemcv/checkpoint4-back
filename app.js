@@ -5,7 +5,7 @@ const cors = require('cors');
 const { setupRoutes } = require('./routes');
 const pool = require('./db-config');
 
-const PORT = process.env.DB_PORT;
+const PORT = process.env.DB_PORT || 9000;
 
 pool.getConnection(function (err, conn) {
   if (err) {
@@ -22,5 +22,5 @@ app.use(express.json());
 setupRoutes(app);
 
 app.listen(PORT, () =>
-  console.log(`Express server is running`)
+  console.log(`Express server is running on port ${PORT}`)
 );
