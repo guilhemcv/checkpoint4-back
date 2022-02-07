@@ -22,5 +22,5 @@ app.use(express.json());
 setupRoutes(app);
 
 app.listen(PORT, () =>
-  console.log(`Express server is running on port ${PORT}`)
+  console.log(`Express server is running on port`)
 );
