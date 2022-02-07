@@ -3,18 +3,17 @@ require('dotenv').config();
 const app = express();
 const cors = require('cors');
 const { setupRoutes } = require('./routes');
-const connection = require('./db-config');
+const pool = require('./db-config');
 
 const PORT = process.env.DB_PORT || 8000;
 
-connection.connect((err) => {
+pool.getConnection(function (err, conn) {
   if (err) {
-    console.error('error connecting: ' + err.stack);
+    console.error(`error connecting${err.stack}`);
   } else {
-    console.log(
-      'connected to database with threadId :  ' + connection.threadId
-    );
+    console.log(`connected as id ${conn.threadId}`);
   }
+  /*   pool.releaseConnection(conn); */
 });
 
 app.use(cors());
