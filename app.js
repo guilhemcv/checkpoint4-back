@@ -5,7 +5,7 @@ const cors = require('cors');
 const { setupRoutes } = require('./routes');
 const pool = require('./db-config');
 
-const PORT = process.env.DB_PORT || 9000;
+const PORT = process.env.DB_PORT || 6000;
 
 pool.getConnection(function (err, conn) {
   if (err) {
